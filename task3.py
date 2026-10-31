@@ -6,67 +6,31 @@ sales = {
     "Пятница":     [("капучино", 120, 10), ("эспрессо", 90, 21), ("какао", 110, 9)],
 }
 
-total_pon = 0
-for name, price, qty in sales["Понедельник"]:
-    total_pon += price * qty
-print("Понедельник: выручка", total_pon)
+g = {"Понедельник": "Понедельника", "Вторник": "Вторника", "Среда": "Среды",
+     "Четверг": "Четверга", "Пятница": "Пятницы"}
 
-best_pon = ""
-cnt_pon = 0
-for name, price, qty in sales["Понедельник"]:
-    if qty > cnt_pon:
-        cnt_pon = qty
-        best_pon = name
-print("Хит Понедельника:", best_pon)
 
-total_vt = 0
-for name, price, qty in sales["Вторник"]:
-    total_vt += price * qty
-print("Вторник: выручка", total_vt)
+def total(a):
+    s = 0
+    for n, p, q in a:
+        s += p * q
+    return s
 
-best_vt = ""
-cnt_vt = 0
-for name, price, qty in sales["Вторник"]:
-    if qty > cnt_vt:
-        cnt_vt = qty
-        best_vt = name
-print("Хит Вторника:", best_vt)
 
-total_sr = 0
-for name, price, qty in sales["Среда"]:
-    total_sr += price * qty
-print("Среда: выручка", total_sr)
+def hit(a):
+    b = ""
+    m = 0
+    for n, p, q in a:
+        if q > m:
+            m = q
+            b = n
+    return b
 
-best_sr = ""
-cnt_sr = 0
-for name, price, qty in sales["Среда"]:
-    if qty > cnt_sr:
-        cnt_sr = qty
-        best_sr = name
-print("Хит Среды:", best_sr)
 
-total_cht = 0
-for name, price, qty in sales["Четверг"]:
-    total_cht += price * qty
-print("Четверг: выручка", total_cht)
+def show(d, a):
+    print(d + ": выручка", total(a))
+    print("Хит " + g.get(d, d) + ":", hit(a))
 
-best_cht = ""
-cnt_cht = 0
-for name, price, qty in sales["Четверг"]:
-    if qty > cnt_cht:
-        cnt_cht = qty
-        best_cht = name
-print("Хит Четверга:", best_cht)
 
-total_pt = 0
-for name, price, qty in sales["Пятница"]:
-    total_pt += price * qty
-print("Пятница: выручка", total_pt)
-
-best_pt = ""
-cnt_pt = 0
-for name, price, qty in sales["Пятница"]:
-    if qty > cnt_pt:
-        cnt_pt = qty
-        best_pt = name
-print("Хит Пятницы:", best_pt)
+for d in sales:
+    show(d, sales[d])
